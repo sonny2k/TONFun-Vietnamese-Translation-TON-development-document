@@ -1,0 +1,53 @@
+Thư mục đã sử dụng:
+mytonctrl là một lớp bộc và nó lưu tệp ở hai nơi:
+1. ~/.local/share/mytonctrl/ - các tệp lâu dài như lịch sử ghi chép (logs)
+2. /tmp/mytonctrl/ - các tệp tạm
+
+mytonctrl cũng lưu trữ đoạn mã khác của mytoncore, Nó lưu tệp ở đây:
+1. ~/.local/share/mytoncore/ - Tệp vĩnh viễn, cấu hình chính sẽ được bảo quản ở đây
+2. /tmp/mytoncore/ - tệp tạm, Những tham số dùng cho việc tuyển cử được lưu tại đây
+
+mytonctrl tải về mã nguồn code của chính nó cũng như của công cụ xác thực (validator) vào trong những thư mục:
+1. /usr/src/mytonctrl/
+2. /usr/src/ton/
+
+mytonctrl biên dịch thành phần của công cụ xác thực vào thư mục:
+1. /usr/bin/ton/
+
+mytonctrl tạo một thư mục cho công cụ xác thực hoạt động tại:
+1. /var/ton/
+
+===========================================================================================================
+
+Nếu mytonctrl được cài đặt dưới quyền root:
+Cấu hình sẽ nằm ở đường dẫn khác:
+1. /usr/local/bin/mytonctrl/
+2. /usr/local/bin/mytoncore/
+
+===========================================================================================================
+
+Làm thế nào để gỡ mytonctrl:
+chạy đoạn mã sau dưới quyền quản trị viên để gỡ các thành phần đã được biên dịch của TON:
+`sudo bash /usr/src/mytonctrl/scripts/uninstall.sh`
+`sudo rm -rf /usr/bin/ton`
+
+===========================================================================================================
+
+Nếu ta chạy mytonctrl dưới quyền một người dùng khác, ta sẽ gặp lỗi này. Giải pháp xử lý là chạy nó dưới quyền người dùng bạn đã dùng để cài đặt:
+`Error: expected str, bytes or os.PathLike object, not NoneType`
+(error screen + normal startup screen)
+
+===========================================================================================================
+
+Nếu ta muốn thay đổi thư mục hoạt động của công cụ xác thực trước khi cài đặt, có hai lựa chọn:
+1.fork lại dự án và áp dụng thay đổi (man git-fork)
+2.hoặc là tạo đường dẫn tượng trưng:
+`ln -s /opt/ton/var/ton` - Tạo một đường dẫn /var/ton trỏ đến /opt/ton
+
+===========================================================================================================
+
+Nếu ta muốn thay đổi thư mục hoạt động của công cụ xác thực từ /var/ton/, thì ta làm những bước này sau khi cài đặt:
+1.`systemctl stop validator`, `systemctl stop mytoncore` - Ngừng các dịch vụ (services)
+2.`mv /var/ton/* /opt/ton/`- Di chuyển các tệp của công cục xác thực
+3. Thay thế đường dẫn trong cấu hình `~ /.local/share/mytoncore/mytoncore.db`
+4. Sau đó ta chủ động quan sát tình huống - vì chưa từng có tiền lệ nào cho việc chuyển đổi này trước đây
