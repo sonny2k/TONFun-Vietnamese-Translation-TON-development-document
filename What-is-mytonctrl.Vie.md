@@ -38,7 +38,7 @@ Console này bao gồm `fift`,`lite-client` và `validator-engine-console`. Nó 
 	- [ ] Gia hạn miền tự động
 - [x] Điều khiển công cụ xác thực
 	- [x] Tham gia vào quá trình tuyển cử của một công cụ xác thực
-	- [x] Trả về thông tin cá cược + tiền thưởng
+	- [x] Trả về thông tin cược + tiền thưởng
 	- [x] Tự động chạy lại công cụ xác thực khi công cụ bị chấm dứt bất thường (systemd)
 	- [x] Gửi thông kê xác thực tới https://toncenter.com
 
